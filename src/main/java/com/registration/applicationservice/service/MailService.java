@@ -7,6 +7,7 @@ import com.registration.applicationservice.model.ApplicationStatus;
 import com.registration.applicationservice.model.EmailListRequest;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +20,11 @@ public class MailService {
     private final UserServiceClient userServiceClient;
     private final ApplicationRepository applicationRepository;
 
-    public List<EmailDto> findEmailsByUserIds() {
+    public ResponseEntity<List<EmailDto>> findEmailsByUserIds() {
         EmailListRequest userIds = new EmailListRequest(applicationRepository
                 .findAllByStatusEqualsOrStatusEquals(ApplicationStatus.ACCEPTED, ApplicationStatus.ACCEPTED)
                 .stream()
                 .map(ApplicationEntity::getUserId).toList());
-        return userServiceClient.getEmails(userIds).getBody();
+        return userServiceClient.getEmails(userIds);
     }
 }

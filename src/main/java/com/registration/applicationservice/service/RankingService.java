@@ -19,11 +19,13 @@ import java.util.Map;
 public class RankingService {
     private final ApplicationRepository applicationRepository;
     private final CourseRepository courseRepository;
+    private final MailService mailService;
 
     @Scheduled(cron = "${recrutation.results.date}")
     public void announceResults() {
         updateStatusToAccepted(createRankingForEachCourse());
         updateStatusToRejected();
+//        mailService.findEmailsByUserIds();
     }
 
     private Map<CourseEntity, List<ApplicationEntity>> createRankingForEachCourse() {
