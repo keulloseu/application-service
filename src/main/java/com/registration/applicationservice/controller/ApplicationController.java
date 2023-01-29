@@ -4,6 +4,7 @@ import com.registration.applicationservice.dto.ApplicationDto;
 import com.registration.applicationservice.entity.ApplicationEntity;
 import com.registration.applicationservice.model.ApplicationCreationRequest;
 import com.registration.applicationservice.model.PaginationRequest;
+import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ApplicationController {
 
     private final ApplicationService applicationService;
+    private final ApplicationRepository applicationRepository;
 
     @GetMapping
     public ResponseEntity<List<ApplicationDto>> getUserApplications(@RequestParam(value = "userId") Long userId) {
@@ -29,11 +31,8 @@ public class ApplicationController {
         return applicationService.postApplication(request, userId);
     }
 
-
-///////////////////////////////////////////////////////////////
-
-    @GetMapping("/all")
-    public ResponseEntity<Page<ApplicationEntity>> getAllApplications(@RequestBody PaginationRequest request) {
-        return ResponseEntity.ok(applicationService.getAllApplications(request.getPageNumber(), request.getPageSize()));
+    @DeleteMapping
+    public void deleteApplication(@RequestParam("appId") Long appId) {
+        applicationRepository.deleteById(appId);
     }
 }

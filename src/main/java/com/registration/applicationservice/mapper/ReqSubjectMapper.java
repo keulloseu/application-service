@@ -8,6 +8,6 @@ import org.mapstruct.NullValueCheckStrategy;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public abstract class ReqSubjectMapper {
-    @Mapping(target = "subjectName", source = "reqSubjectEntity.subjectName")
+    @Mapping(target = "subjectName", source = "subjectName")
     public abstract ReqSubject subjectToDto(ReqSubjectEntity reqSubject);
 }

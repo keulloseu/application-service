@@ -2,13 +2,11 @@ package com.registration.applicationservice.service;
 
 import com.registration.applicationservice.dto.ApplicationDto;
 import com.registration.applicationservice.entity.ApplicationEntity;
-import com.registration.applicationservice.entity.ApplicationImageEntity;
 import com.registration.applicationservice.entity.CourseEntity;
 import com.registration.applicationservice.mapper.ApplicationEntityMapper;
 import com.registration.applicationservice.model.ApplicationCreationRequest;
 import com.registration.applicationservice.model.ApplicationStatus;
 import com.registration.applicationservice.model.Subject;
-import com.registration.applicationservice.repository.ApplicationImageRepository;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.repository.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -27,7 +25,6 @@ public class ApplicationService {
 
     private final CourseRepository courseRepository;
     private final ApplicationRepository applicationRepository;
-    private final ApplicationImageRepository applicationImageRepository;
     private final ApplicationEntityMapper applicationEntityMapper;
 
     public ResponseEntity<String> postApplication(ApplicationCreationRequest request, Long userId) {
@@ -49,7 +46,6 @@ public class ApplicationService {
                 .totalScore(calculateScore(request.getSubjectsWithScore()))
                 .status(ApplicationStatus.PENDING)
                 .course(getCourse(request.getCourseName()))
-                .applicationImage(createImageEntity(request.getImagePath(), request.getImageFileName()))
                 .userId(userId)
                 .build();
     }
@@ -67,12 +63,4 @@ public class ApplicationService {
                 .orElseThrow(() -> new EntityNotFoundException("Course not found"));
     }
 
-    private ApplicationImageEntity createImageEntity(String imagePath, String imageFileName) {
-        ApplicationImageEntity image = ApplicationImageEntity.builder()
-                .imagePath(imagePath)
-                .imageFileName(imageFileName)
-                .build();
-        applicationImageRepository.save(image);
-        return image;
-    }
 }

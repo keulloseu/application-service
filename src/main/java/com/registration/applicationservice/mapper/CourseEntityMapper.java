@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public abstract class CourseEntityMapper {
-    @Mapping(target = "courseName", source = "courseEntity.courseName")
+    @Mapping(target = "courseName", source = "course.courseName")
     @Mapping(target = "reqSubjects", source = "reqSubjectEntities")
     public abstract CourseDto courseToDto(CourseEntity course, List<ReqSubject> reqSubjectEntities);
 }

@@ -22,7 +22,7 @@ public class CourseService {
 
     public List<CourseDto> getCoursesWithReqSubjects() {
         return courseRepository.findAll().stream()
-                .map(c -> courseEntityMapper.courseToDto(c, reqSubjectRepository.findAllByCourses(Set.of(c))
+                .map(c -> courseEntityMapper.courseToDto(c, reqSubjectRepository.findAllByCoursesIn(Set.of(c))
                         .stream().map(reqSubjectMapper::subjectToDto).toList())).toList();
     }
 }

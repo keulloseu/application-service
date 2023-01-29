@@ -20,8 +20,5 @@ public class ApplicationEntity {
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private CourseEntity course;
-    @OneToOne
-    @JoinColumn(name = "image_id")
-    private ApplicationImageEntity applicationImage;
     private Long userId;
 }

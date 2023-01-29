@@ -15,8 +15,4 @@ public class ApplicationCreationRequest {
     private String courseName;
     @Schema(example = "[]")
     private Set<Subject> subjectsWithScore;
-    @Schema(example = "asdasfsdfgdfg")
-    private String imagePath;
-    @Schema(example = "gdfsgafsad")
-    private String imageFileName;
 }

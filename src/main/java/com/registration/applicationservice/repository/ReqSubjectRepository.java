@@ -10,5 +10,5 @@ import java.util.Set;
 
 @Repository
 public interface ReqSubjectRepository extends JpaRepository<ReqSubjectEntity, Long> {
-    List<ReqSubjectEntity> findAllByCourses(Set<CourseEntity> courses);
+    List<ReqSubjectEntity> findAllByCoursesIn(Set<CourseEntity> courses);
 }
