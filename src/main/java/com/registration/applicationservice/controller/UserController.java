@@ -15,8 +15,13 @@ import java.util.List;
 public class UserController {
     private final MailService mailService;
 
-    @PostMapping
-    public ResponseEntity<List<EmailDto>> getEmailsToSend() {
-        return mailService.findEmailsByUserIds();
+    @PostMapping("/rejected")
+    public ResponseEntity<List<EmailDto>> getEmailsForRejected() {
+        return mailService.findEmailsForRejectedApps();
+    }
+
+    @PostMapping("/accepted")
+    public ResponseEntity<List<EmailDto>> getEmailsForAccepted() {
+        return mailService.findEmailsForAcceptedApps();
     }
 }

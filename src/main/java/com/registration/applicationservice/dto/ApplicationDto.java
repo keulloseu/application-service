@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplicationDto {
+    private Long applicationId;
     private Double totalScore;
     private ApplicationStatus status;
     private String courseName;

@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +18,17 @@ public class MailService {
     private final UserServiceClient userServiceClient;
     private final ApplicationRepository applicationRepository;
 
-    public ResponseEntity<List<EmailDto>> findEmailsByUserIds() {
+    public ResponseEntity<List<EmailDto>> findEmailsForRejectedApps() {
         EmailListRequest userIds = new EmailListRequest(applicationRepository
-                .findAllByStatusEqualsOrStatusEquals(ApplicationStatus.ACCEPTED, ApplicationStatus.ACCEPTED)
+                .findAllByStatus(ApplicationStatus.REJECTED)
+                .stream()
+                .map(ApplicationEntity::getUserId).toList());
+        return userServiceClient.getEmails(userIds);
+    }
+
+    public ResponseEntity<List<EmailDto>> findEmailsForAcceptedApps() {
+        EmailListRequest userIds = new EmailListRequest(applicationRepository
+                .findAllByStatus(ApplicationStatus.ACCEPTED)
                 .stream()
                 .map(ApplicationEntity::getUserId).toList());
         return userServiceClient.getEmails(userIds);

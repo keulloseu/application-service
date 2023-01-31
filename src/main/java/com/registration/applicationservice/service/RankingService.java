@@ -1,8 +1,11 @@
 package com.registration.applicationservice.service;
 
+import com.registration.applicationservice.dto.EmailDto;
 import com.registration.applicationservice.entity.ApplicationEntity;
 import com.registration.applicationservice.entity.CourseEntity;
+import com.registration.applicationservice.feignClient.MailServiceClient;
 import com.registration.applicationservice.model.ApplicationStatus;
+import com.registration.applicationservice.model.SendEmailsRequest;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +23,15 @@ public class RankingService {
     private final ApplicationRepository applicationRepository;
     private final CourseRepository courseRepository;
     private final MailService mailService;
+    private final MailServiceClient mailServiceClient;
 
     @Scheduled(cron = "${recrutation.results.date}")
     public void announceResults() {
         updateStatusToAccepted(createRankingForEachCourse());
         updateStatusToRejected();
-//        mailService.findEmailsByUserIds();
+        List<EmailDto> accepted = mailService.findEmailsForAcceptedApps().getBody();
+        List<EmailDto> rejected = mailService.findEmailsForRejectedApps().getBody();
+        mailServiceClient.sendEmails(new SendEmailsRequest(accepted, rejected));
     }
 
     private Map<CourseEntity, List<ApplicationEntity>> createRankingForEachCourse() {

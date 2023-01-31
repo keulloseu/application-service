@@ -11,8 +11,6 @@ import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.repository.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +34,8 @@ public class ApplicationService {
         return applicationRepository.findAllByUserId(userId).stream().map(applicationEntityMapper::applicationToDto).toList();
     }
 
-    public Page<ApplicationEntity> getAllApplications(int pageNumber, int pageSize) {
-
-        return applicationRepository.findAll(PageRequest.of(pageNumber, pageSize));
+    public List<ApplicationDto> getAllApplications() {
+        return applicationRepository.findAll().stream().map(applicationEntityMapper::applicationToDto).toList();
     }
 
     private ApplicationEntity createApplication(ApplicationCreationRequest request, Long userId) {

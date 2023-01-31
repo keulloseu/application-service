@@ -11,6 +11,7 @@ import org.mapstruct.NullValueCheckStrategy;
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public abstract class ApplicationEntityMapper {
 
+    @Mapping(target = "applicationId", source = "applicationId")
     @Mapping(target = "totalScore", source = "totalScore")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "courseName", source = "course", qualifiedByName = "mapCourseName")

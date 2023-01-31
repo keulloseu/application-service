@@ -35,4 +35,9 @@ public class ApplicationController {
     public void deleteApplication(@RequestParam("appId") Long appId) {
         applicationRepository.deleteById(appId);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ApplicationDto>> getAllApplications() {
+        return ResponseEntity.ok(applicationService.getAllApplications());
+    }
 }

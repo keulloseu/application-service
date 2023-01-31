@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "mail-service", url = "${mail_service.url}")
 public interface MailServiceClient {
-    @PostMapping(value = "/api/send")
+    @PostMapping(value = "/api/email/sender")
     void sendEmails(@RequestBody SendEmailsRequest emails);
 }

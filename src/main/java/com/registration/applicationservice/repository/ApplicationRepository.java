@@ -19,5 +19,4 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
 
     List<ApplicationEntity> findAllByStatus(ApplicationStatus status);
 
-    List<ApplicationEntity> findAllByStatusEqualsOrStatusEquals(ApplicationStatus status, ApplicationStatus status1);
 }
