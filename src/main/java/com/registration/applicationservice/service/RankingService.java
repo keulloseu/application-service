@@ -9,7 +9,6 @@ import com.registration.applicationservice.model.SendEmailsRequest;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
