@@ -1,13 +1,10 @@
 package com.registration.applicationservice.controller;
 
 import com.registration.applicationservice.dto.ApplicationDto;
-import com.registration.applicationservice.entity.ApplicationEntity;
 import com.registration.applicationservice.model.ApplicationCreationRequest;
-import com.registration.applicationservice.model.PaginationRequest;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

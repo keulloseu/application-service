@@ -1,6 +1,5 @@
 package com.registration.applicationservice.dto;
 
-import com.registration.applicationservice.entity.ReqSubjectEntity;
 import com.registration.applicationservice.model.ReqSubject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

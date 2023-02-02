@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,5 +14,5 @@ public class ApplicationCreationRequest {
     @Schema(example = "Medycyna")
     private String courseName;
     @Schema(example = "[]")
-    private Set<Subject> subjectsWithScore;
+    private List<Subject> subjectsWithScore;
 }

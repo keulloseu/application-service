@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReqSubject {
     private String subjectName;
+    private Long rate;
 }

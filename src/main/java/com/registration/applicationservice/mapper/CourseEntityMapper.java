@@ -2,7 +2,6 @@ package com.registration.applicationservice.mapper;
 
 import com.registration.applicationservice.dto.CourseDto;
 import com.registration.applicationservice.entity.CourseEntity;
-import com.registration.applicationservice.entity.ReqSubjectEntity;
 import com.registration.applicationservice.model.ReqSubject;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +46,7 @@ public class ApplicationService {
                 .build();
     }
 
-    private Double calculateScore(Set<Subject> subjectsWithScore) {
+    private Double calculateScore(List<Subject> subjectsWithScore) {
         Double totalScore = 0.0;
         for (Subject subject : subjectsWithScore) {
             totalScore = totalScore + subject.getScore() * subject.getRate();
