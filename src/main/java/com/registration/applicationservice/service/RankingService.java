@@ -9,6 +9,7 @@ import com.registration.applicationservice.model.SendEmailsRequest;
 import com.registration.applicationservice.repository.ApplicationRepository;
 import com.registration.applicationservice.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class RankingService {
     private final MailService mailService;
     private final MailServiceClient mailServiceClient;
 
+    @Value("${course.max.users}")
+    private Integer maxStudents;
+
     @Scheduled(cron = "${recrutation.results.date}")
     public void announceResults() {
         updateStatusToAccepted(createRankingForEachCourse());
@@ -37,7 +41,7 @@ public class RankingService {
         List<CourseEntity> courses = courseRepository.findAll();
         Map<CourseEntity, List<ApplicationEntity>> applicationRankings = new HashMap<>();
         for (CourseEntity course : courses) {
-            applicationRankings.put(course, applicationRepository.findAllByCourse(course));
+            applicationRankings.put(course, applicationRepository.findAllByCourse(course).subList(0, maxStudents));
         }
         return applicationRankings;
     }
